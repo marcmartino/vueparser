@@ -1,9 +1,10 @@
 <template>
-  <span class="variable">
+  <span class="scalar variable">
     <span v-if="!editing" v-on:dblclick="toggleEdit">
       <span class='varName' v-bind:class="{ hasValue }">
         {{dataObj.value}}<span class='varVal'>({{variables[dataObj.value]}})</span></span>
     </span>
+    <span class="removeButton" v-on:dblclick="removeNumber">^</span>
     <span v-if="editing">
       <input class="editName"
              v-focus
@@ -34,6 +35,10 @@
       }
     },
     methods: {
+      removeNumber: function () {
+        this.$emit('modifyChild', [{modifyAction: 'remove', detailsObj: this.dataObj.id}])
+        this.sendValueUpdate()
+      },
       sendValueUpdate: function () {
         this.$emit('variableChange', {id: this.dataObj.id, value: this.variables[this.dataObj.value]})
       },
@@ -77,6 +82,19 @@
   }
   .varVal {
     font-size: smaller;
+  }
+
+  .removeButton {
+    display: none;
+    position: absolute;
+    top: 1em;
+  }
+  .variable:hover > .removeButton {
+    display: block;
+  }
+  .variable {
+    position: relative;
+    display: inline-block;
   }
 
 </style>

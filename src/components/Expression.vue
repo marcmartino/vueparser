@@ -17,6 +17,7 @@
             @variableChange="childValueUpdate"
             @modifyChild="modifyChild"></component>
         <concatinate-expression @modifyChild="modifyChild"></concatinate-expression>
+        <span class="removeButton" v-on:dblclick="removeThisElement"><</span>
         <span>)</span>
       </span>
   </span>
@@ -46,6 +47,10 @@
       }
     },
     methods: {
+      removeThisElement: function () {
+        this.$emit('modifyChild', [{modifyAction: 'remove', detailsObj: this.dataObj.id}])
+        this.childValueUpdate()
+      },
       modifyChild: function (childEditStack) {
         childEditStack.push(this.dataObj.id)
         this.$emit('modifyChild', childEditStack)
@@ -73,13 +78,22 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .expression {
-      position: relative;
+    position: relative;
   }
   .expressionText {
-      position: relative;
+    position: relative;
   }
   .calcVal {
-      position: absolute;
-      top: -1em;
+    position: absolute;
+    top: -1em;
+  }
+  .removeButton {
+    display: none;
+  }
+  .exprText:hover > .removeButton {
+    display: inline;
+  }
+  .scalar+.scalar {
+    margin-left: 5px;
   }
 </style>

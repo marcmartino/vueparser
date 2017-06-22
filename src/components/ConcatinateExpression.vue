@@ -3,6 +3,7 @@
     <div class='newChildOptions'>
       <span @click="newNumber">#</span>
       <span @click="newVariable">?</span>
+      <span @click="newExpr">()</span>
     </div>
     <span >@</span>
   </span>
@@ -18,17 +19,24 @@
     },
     props: ['idGen'],
     methods: {
+      newExpr: function () {
+        this.sendNewChildEvent([], 'expression', 'addition')
+      },
       newNumber: function () {
         this.sendNewChildEvent(0, 'number')
       },
       newVariable: function () {
         this.sendNewChildEvent('newVar', 'variable')
       },
-      sendNewChildEvent: function (value, type) {
+      sendNewChildEvent: function (value, type, functionName) {
         let newChildObj = [{
           modifyAction: 'create',
+          // TODO: Math.rand() needs to be replaced with a real id generator to avoid collisions
           detailsObj: {id: (Math.floor(Math.random() * 1000) + 20), value, type}
         }]
+        if (functionName !== undefined) {
+          newChildObj[0].detailsObj.functionName = functionName
+        }
         this.$emit('modifyChild', newChildObj)
       }
     }
@@ -47,7 +55,7 @@
     right: -30px;
     border: 5px solid blueviolet;
     border-radius: 5px;
-    width: 60px;
+    width: 85px;
   }
   .newChildOptions .span {
     text-align: center;

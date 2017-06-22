@@ -1,8 +1,9 @@
 <template>
-  <span class="number">
+  <span class="scalar number">
     <span v-if="!editing" v-on:dblclick="toggleEdit">
       {{dataObj.value | rounded}}
     </span>
+    <span class="removeButton" v-on:dblclick="removeNumber">^</span>
     <span v-if="editing">
       <input class="editNum"
              v-focus
@@ -29,6 +30,10 @@
       }
     },
     methods: {
+      removeNumber: function () {
+        this.$emit('modifyChild', [{modifyAction: 'remove', detailsObj: this.dataObj.id}])
+        this.sendValueUpdate()
+      },
       sendValueUpdate: function () {
         this.$emit('variableChange', {id: this.dataObj.id, value: this.dataObj.value})
       },
@@ -57,5 +62,17 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  .removeButton {
+    display: none;
+    position: absolute;
+    top: 1em;
+  }
+  .number:hover > .removeButton {
+    display: block;
+  }
+  .number {
+    position: relative;
+    display: inline-block;
+  }
 </style>

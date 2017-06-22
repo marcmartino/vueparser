@@ -67,7 +67,17 @@
           case 'functionChange':
             this.changeFunction(modifyDetailsObj.detailsObj, foundObj)
             break
+          case 'remove':
+            this.removeChildInRoot(modifyDetailsObj.detailsObj, foundObj)
+            break
         }
+      },
+      removeChildInRoot: function (removalId, foundObj) {
+        const removalIndex = foundObj.value.reduce((collectedObj, childObj, index) => {
+          collectedObj[childObj.id] = index
+          return collectedObj
+        }, {})[removalId]
+        foundObj.value.splice(removalIndex, 1)
       },
       changeFunction: function (newFuncName, foundObj) {
         foundObj.functionName = newFuncName
@@ -79,6 +89,7 @@
         foundObj.value.push(newChildObj)
       },
       findInnerObjByIds: function (obj, idsStack) {
+        // TODO maybe convert this to use the approach in removeChildInRoot
         if (idsStack.length) {
           let searchId = idsStack.pop()
           for (searchId; searchId !== undefined; searchId = idsStack.pop()) {
