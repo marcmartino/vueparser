@@ -37,4 +37,12 @@ var funcNames = {
   }
 }
 
-export default funcNames
+function expressionEval (exprObj, varsObj) {
+  if (exprObj.type === 'expression') {
+    return funcNames[exprObj.functionName].func(
+      exprObj.value.map((childObj) => expressionEval(childObj, varsObj)))
+  }
+  return exprObj.type === 'variable' ? varsObj[exprObj.value] : exprObj.value
+}
+
+export {funcNames, expressionEval}

@@ -27,7 +27,7 @@
   import Number from './Number'
   import ConcatinateExpression from './ConcatinateExpression'
   import FunctionSelector from './FunctionSelector'
-  import evalFuncs from '../funcsAndEval'
+  import {funcNames as evalFuncs} from '../funcsAndEval'
 
   export default {
     name: 'expression',

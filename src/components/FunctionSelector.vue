@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import evalFuncs from '../funcsAndEval'
+  import {funcNames as evalFuncs} from '../funcsAndEval'
 
   export default {
     name: 'functionSelector',
