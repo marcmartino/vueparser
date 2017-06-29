@@ -22,9 +22,13 @@
             <rect  x='2%' y='0' height='98.5%' width='96%' fill='#AA0000' stroke='#000000'  />
         </clipPath>
       </defs>
-      <g id='bellCurveGroup'>
-        <path id='bellCurvePath' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z'  fill='url(#g)'/>
-        <path id='curveLine' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z' fill="transparent" stroke-width="8px"  stroke="black"/>
+      <g id="graphGroup">
+        <line x1='7%' y1='1%' x2='7%' y2='100%' stroke-width='4' stroke="black"/>
+        <line x1='3%' y1='95%' x2='98%' y2='95%' stroke-width='4' stroke="black"/>
+        <g id='bellCurveGroup'>
+          <path id='bellCurvePath' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z'  fill='url(#g)'/>
+          <path id='curveLine' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z' fill="transparent" stroke-width="8px"  stroke="black"/>
+        </g>
       </g>
     </svg>
 
@@ -52,8 +56,8 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   .bellCurveSvg {
-      height: 300px;
-      width: 300px;
+    height: 200px;
+    width: 300px;
   }
   #curveAreaRectClip {
 
@@ -65,7 +69,7 @@
     clip-path: url(#curveAreaRectClip);
   }
   #bellCurveGroup {
-      clip-path: url(#bellCurveGroupClip);
-      transform: translate(10px 10px);
+    clip-path: url(#bellCurveGroupClip);
+    transform: translate(60px, 10px) scale(.9, .9);
   }
 </style>
