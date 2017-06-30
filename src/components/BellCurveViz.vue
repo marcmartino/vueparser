@@ -12,7 +12,7 @@
           <stop offset='75.000001%' stop-color='rgb(155,10,0)'/>
           <stop offset='100%' stop-color='rgb(155,10,0)'/>
         </linearGradient>
-        <clipPath id='curveAreaRectClip'>
+        <clipPath v-bind:id="clipPathId">
           <rect x='0' y='0' height='100%' v-bind:width="simplifiedScore" fill='#AA0000' stroke='#000000' stroke-width='1.5794' />
         </clipPath>
         <clipPath id='curveLineRectClip'>
@@ -26,7 +26,7 @@
         <line x1='7%' y1='1%' x2='7%' y2='100%' stroke-width='4' stroke="black"/>
         <line x1='3%' y1='95%' x2='98%' y2='95%' stroke-width='4' stroke="black"/>
         <g id='bellCurveGroup'>
-          <path id='bellCurvePath' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z'  fill='url(#g)'/>
+          <path id='bellCurvePath' v-bind:clip-path="clipPathUrl" d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z'  fill='url(#g)'/>
           <path id='curveLine' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z' fill="transparent" stroke-width="8px"  stroke="black"/>
         </g>
       </g>
@@ -41,32 +41,31 @@
     props: ['score'],
     data () {
       return {
+        genId: this._uid
       }
     },
     computed: {
       simplifiedScore: function () {
         return (this.score < 100 ? this.score : this.score % 100).toString() + '%'
+      },
+      clipPathId: function () {
+        return 'clipPath' + this.genId
+      },
+      clipPathUrl: function () {
+        return `url(#${this.clipPathId})`
       }
-    },
-    methods: {
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
   .bellCurveSvg {
     height: 200px;
     width: 300px;
   }
-  #curveAreaRectClip {
-
-  }
   #curveLine {
     clip-path: url(#curveLineRectClip);
-  }
-  #bellCurvePath {
-    clip-path: url(#curveAreaRectClip);
   }
   #bellCurveGroup {
     clip-path: url(#bellCurveGroupClip);
