@@ -3,7 +3,7 @@
     <h2>variable grid</h2>
     <div v-for="varObj in variableList">
       <span><input v-model='varObj.name'></span>
-      <span><input v-model='varObj.value'></span>
+      <span><input type="number" v-model='varObj.value'></span>
     </div>
     <div v-on:click="newVariable">+</div>
     <textarea>{{compiledVarObj}}</textarea>
