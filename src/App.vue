@@ -11,7 +11,7 @@
       <variable-grid @variableUpdate="variableUpdate"></variable-grid>
       <textarea class="exprTextarea" v-model="expObjJson"></textarea>
     </div>
-    <bell-curve-viz :score="expVal"></bell-curve-viz>
+    <bell-curve-viz :score="expVal" :projectedPrice="10"></bell-curve-viz>
   </div>
 </template>
 
