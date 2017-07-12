@@ -51,11 +51,13 @@
   .newChildOptions {
     display: none;
     position: absolute;
-    top: -2em;
+    top: -1.9em;
     right: -30px;
     border: 5px solid blueviolet;
     border-radius: 5px;
     width: 85px;
+    background-color: white;
+    text-align: center;
   }
   .newChildOptions .span {
     text-align: center;

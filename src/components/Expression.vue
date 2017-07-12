@@ -28,7 +28,8 @@
   import Number from './Number'
   import ConcatinateExpression from './ConcatinateExpression'
   import FunctionSelector from './FunctionSelector'
-  import {funcNames as evalFuncs} from '../funcsAndEval'
+  import {expressionEval} from '../funcsAndEval'
+  // import {funcNames as evalFuncs} from '../funcsAndEval'
 
   export default {
     name: 'expression',
@@ -42,8 +43,7 @@
     data () {
       return {
         calculatedValue: 0,
-        childVals: {},
-        add: 'addition'
+        childVals: {}
       }
     },
     methods: {
@@ -62,8 +62,7 @@
         this.$emit('variableChange', {id: this.dataObj.id, value: this.calcVal()})
       },
       calcVal: function () {
-        let childrenValuesArr = this.dataObj.value.map((childObj) => this.childVals[childObj.id])
-        this.calculatedValue = evalFuncs[this.dataObj.functionName].func(childrenValuesArr)
+        this.calculatedValue = expressionEval(this.dataObj, this.variables)
         return this.calculatedValue
       }
     },

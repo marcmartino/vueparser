@@ -28,6 +28,10 @@
     },
     filters: {
       textRep: function (funcName) {
+        if (!evalFuncs || !evalFuncs[funcName]) {
+          console.log('cant find  func for ' + funcName)
+          console.log(this.functionName)
+        }
         return evalFuncs[funcName].textRep
       }
     }
@@ -40,13 +44,15 @@
     display: none;
     position: absolute;
     border: 3px solid darkred;
+    background-color: white;
+    text-align: center;
   }
   .functionSelector {
     position: relative;
   }
   .functionSelector:hover .funcOpts {
     display: block;
-    top: 1em;
+    top: .9em;
     left: -1em;
     width: 5em;
   }

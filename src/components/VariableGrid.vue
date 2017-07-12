@@ -1,12 +1,11 @@
 <template>
   <div class="variableGrid">
     <h2>variable grid</h2>
-    <div v-for="varObj in variableList">
-      <span><input v-model='varObj.name'></span>
-      <span><input type="number" v-model='varObj.value'></span>
+    <div v-for="varName in expectedVars">
+      <span>{{varName}}</span>
+      <span><input v-on:change="updateCompiledVars" type="number" v-model="variableList[varName]"></span>
     </div>
     <div v-on:click="newVariable">+</div>
-    <textarea>{{compiledVarObj}}</textarea>
   </div>
 </template>
 
@@ -14,29 +13,30 @@
 
   export default {
     name: 'variableGrid',
-    props: [],
+    props: ['expectedVars'],
     data () {
       return {
-        variableList: [{name: 'ram', value: 10}, {name: 'screenSize', value: 11}, {name: 'hardDrive', value: 11}]
+        variableList: {},
+        compiledVarsObj: {}
       }
-    },
-    watch: {
     },
     methods: {
       newVariable: function () {
-        this.$set(this.variableList, this.variableList.length, {name: 'newVar', value: 0})
-      }
-    },
-    mounted: function () {
-    },
-    computed: {
-      compiledVarObj: function () {
-        let compVarList = this.variableList.reduce((runningObj, varObj) => {
-          runningObj[varObj.name] = parseFloat(varObj.value)
-          return runningObj
+        // this.$set(this.variableList, this.variableList.length, {name: 'newVar', value: 0})
+        this.$emit('addVariable', prompt('name of new variable'))
+      },
+      updateCompiledVars: function () {
+        let compVarList = this.expectedVars.reduce((collectionObj, varName) => {
+          collectionObj[varName] = parseFloat(this.variableList[varName])
+          return collectionObj
         }, {})
         this.$emit('variableUpdate', compVarList)
-        return compVarList
+        this.compiledVarsObj = compVarList
+      }
+    },
+    watch: {
+      expectedVars: function () {
+        this.updateCompiledVars()
       }
     }
   }

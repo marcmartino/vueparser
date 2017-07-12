@@ -1,6 +1,6 @@
 <template>
   <span class='bellCurve'>
-    <h2>CompuCurve - {{simplifiedScore}}</h2>
+    <!--<h2>CompuCurve - {{simplifiedScore}}</h2>-->
     <svg class='bellCurveSvg' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'>
       <defs>
         <clipPath v-bind:id="clipPathId">
@@ -19,7 +19,7 @@
           <line x1='400' y1='8' x2='400' y2='500' stroke-width='3' stroke='black'></line>
           <path id='curveLine' d='M10,490C230,490 290,10 400,10C500,10 560,490 790,490v5H10z' fill="transparent" stroke-width="8px"  stroke="black"/>
         </g>
-        <text x="50%" y="480" font-family="Verdana" font-size="35" text-anchor="middle">
+        <text v-if="projectedPrice" x="50%" y="480" font-family="Verdana" font-size="35" text-anchor="middle">
           Projection: ${{projectedPrice}}
         </text>
       </g>
@@ -56,7 +56,7 @@
         return this.numeralScore.toString() + '%'
       },
       numeralScore: function () {
-        return this.score % 100
+        return (this.score + 0.4) * 125
       },
       clipPathId: function () {
         return 'clipPath' + this.genId

@@ -42,7 +42,7 @@ function expressionEval (exprObj, varsObj) {
     return funcNames[exprObj.functionName].func(
       exprObj.value.map((childObj) => expressionEval(childObj, varsObj)))
   }
-  return exprObj.type === 'variable' ? varsObj[exprObj.value] : exprObj.value
+  return parseFloat(exprObj.type === 'variable' ? varsObj[exprObj.value] : exprObj.value)
 }
 
 export {funcNames, expressionEval}
