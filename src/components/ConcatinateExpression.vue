@@ -51,7 +51,7 @@
   .newChildOptions {
     display: none;
     position: absolute;
-    top: -1.9em;
+    top: -2.3em;
     right: -30px;
     border: 5px solid blueviolet;
     border-radius: 5px;
@@ -59,10 +59,11 @@
     background-color: white;
     text-align: center;
   }
-  .newChildOptions .span {
+  .newChildOptions span {
     text-align: center;
-    width: 25px;
+    padding: 5px;
     display: inline-block;
+    cursor: pointer;
   }
   .concatExpWidget {
     position: relative;

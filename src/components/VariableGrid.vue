@@ -3,7 +3,7 @@
     <h2>variable grid</h2>
     <div v-for="varName in expectedVars">
       <span>{{varName}}</span>
-      <span><input v-on:change="updateCompiledVars" type="number" v-model="variableList[varName]"></span>
+      <span><input v-on:change="updateCompiledVars" step="any" type="number" v-model="variableList[varName]"></span>
     </div>
     <div v-on:click="newVariable">+</div>
   </div>

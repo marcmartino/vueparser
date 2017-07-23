@@ -20,7 +20,11 @@
             ></variable-grid>
             <!--<textarea class="exprTextarea" v-model="expObjJson"></textarea>-->
         </div>
-        <bell-curve-viz :score="expVal"></bell-curve-viz>
+        <bell-curve-viz :expected="expVal" :actual="computedActualPrice"></bell-curve-viz>
+
+        <div id="examplePrice">
+            <h2>Example Price</h2>
+            <input type="text" v-model="testPrice"></div>
     </div>
 </template>
 
@@ -35,7 +39,7 @@
 
   export default {
     name: 'equationGui',
-    props: ['existingEquations'],
+    props: ['existingEquations', 'actualPrice'],
     components: {
       VariablesForm,
       BellCurveViz,
@@ -50,7 +54,8 @@
         variablesArr: [],
         varData: {},
         eqName: '',
-        eqId: undefined
+        eqId: undefined,
+        testPrice: 0
       }
     },
     methods: {
@@ -66,7 +71,7 @@
       saveEquation: function () {
         console.log('saving #' + this.eqId)
         console.log(JSON.stringify(this.expObj))
-        let eqObj = {id: this.eqId, equation: this.expObj, variables: this.variablesArr, name: this.eqName}
+        let eqObj = {id: this.eqId, equation: JSON.stringify(this.expObj), variables: JSON.stringify(this.variablesArr), name: this.eqName}
         axios[this.eqId ? 'put' : 'post']('/compucurvetype' + (this.eqId ? `/${this.eqId}` : ''),
           eqObj)
           .then(function (response) {
@@ -140,6 +145,9 @@
     computed: {
       expObjJson: function () {
         return JSON.stringify(this.expObj)
+      },
+      computedActualPrice: function () {
+        return parseFloat(this.testPrice || this.actualPrice)
       }
     },
     created: function () {

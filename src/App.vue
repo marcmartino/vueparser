@@ -1,5 +1,6 @@
 <template>
-  <equation-gui :existingEquations="equations"></equation-gui>
+  <equation-gui :existingEquations="equations"
+                :actualPrice="actualPrice"></equation-gui>
 </template>
 
 <script>
@@ -15,7 +16,8 @@
         equations: [
           {id: 1, name: 'testCurve', equation: JSON.parse('{"id": 0, "type": "expression", "value": [{"id": 1, "type": "variable", "value": "testVar"}], "functionName": "subtraction"}'), variables: ['testVar']},
           {id: 2, name: 'testCurveTwo', equation: JSON.parse('{"id": 0, "type": "expression", "value": [{"id": 1, "type": "variable", "value": "testVar"},{"id": 4, "type": "number", "value": 13}], "functionName": "addition"}'), variables: ['testVarTwo', 'testVar']}
-        ]
+        ],
+        actualPrice: undefined
       }
     }
   }

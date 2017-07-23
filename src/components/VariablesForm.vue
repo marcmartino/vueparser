@@ -2,7 +2,7 @@
     <div class="variablesList">
         <div v-for="varName in variablesList">
             <span>{{varName}}</span>
-            <span><input @change="varChangeListener"
+            <span><input @change="varChangeListener" step="any"
                          type="number" v-model="compiledValues[varName]"></span>
         </div>
     </div>
