@@ -50,12 +50,12 @@
     data () {
       return {
         expVal: 0,
-        expObj: {'id': 12, type: 'expression', functionName: 'subtraction', value: []},
+        expObj: {'id': 12, type: 'expression', functionName: 'subtraction', value: [{'id': 88, type: 'number', value: 200}]},
         variablesArr: [],
         varData: {},
         eqName: '',
         eqId: undefined,
-        testPrice: 0
+        testPrice: 162
       }
     },
     methods: {
